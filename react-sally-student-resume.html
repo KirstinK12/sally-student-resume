@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #4c658f;
+            color: #ebedf0;
+        }
+        
+        header h1 {
+            text-align: center;
+            font-size: 35px;
+            text-decoration: underline;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media all and (min-width: 1000px) {
+            main {
+                padding: 0 10%;
+            }
+        }
+    </style>
+
+
+    <title>Sally Resume React</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script
+        src="https://unpkg.com/react@16/umd/react.development.js">
+    </script>
+    <script
+        src="https://unpkg.com/react-dom@16/umd/react-dom.development.js">
+    </script>
+    <script
+        src="https://unpkg.com/babel-standalone@6/babel.min.js">
+    </script>
+
+    <script type="text/babel">
+
+        function ResumeHeader(props) {
+            return (
+                <header>
+                    <h1>{props.name} Resume</h1>
+                </header>
+            );
+        }
+
+        function AboutMe(props) {
+            return (
+                <div>
+                    <h2>About me</h2>
+                    <p> {props.intro} </p>
+                </div>    
+            )
+        }
+
+        function Introduction() {
+            return (
+                <AboutMe intro="Hi I'm Sally I'm 25 and I am a software developer! 
+                Below this line you'll find more information about me." />    
+            )
+
+        }
+        function Photo(props) {
+            return (
+                <img src={props.src} />
+            )
+        }
+
+        function SallyPhoto() {
+            return (
+                <div >
+                    <Photo src="https://ia.media-imdb.com/images/M/MV5BMTY5NzE3NzU3MF5BMl5BanBnXkFtZTgwMjg0NTQ5MDE@._V1_UX214_CR0,0,214,317_AL_.jpg" />
+                </div>    
+            )
+        }
+
+
+ 
+        function Education(props) {
+            return (
+                <li>
+                    <p className="school">{props.school}</p>
+                </li>
+            );
+        }
+        function EducationList() {
+            return (
+                <section className="education">
+                    <h2>I have studied at:</h2>
+                    <ul>
+                        <Education school="I went to high school at: IES BEZMILIANA" />
+                        <Education school="I got my bachelors degree from: Minnesota University" />
+                    </ul>
+                </section>
+            );
+        }
+
+        function JobDescription(props) {       
+            return (
+                <li>
+                    <h3 className="company">{props.company}</h3>
+                    <p className="job">{props.job}</p>
+                </li>
+            );
+        }
+
+        function JobsList() {
+            return (
+                <section className="employment-history">
+                    <h2>I have worked at:</h2>
+                    <ul>
+                        <JobDescription company="Github"
+                        job="I worked as a software engineer during 2018. While I was I helped maintain the GitHub website and assist with user issues." />
+                        <JobDescription company="Jetbrains"
+                        job="I started working at Jetbrain in 2019 and I am currently working as one of their project managers. My work consist of assisting our client's in making their dreams a reality by collaborating with our developers." />            
+                    </ul>
+                </section>
+            );
+        }
+
+        function Address(props) {
+            return (
+                <div>
+                    <h2>My contact information:</h2>
+                    <address>
+                        <p>My name is: {props.name} </p>
+                        <p>My email is: {props.email} </p>
+                        <p>Phone: {props.phone} </p>
+                        
+                    </address>
+                </div>
+            );
+        }
+
+        function ContactInfo() {
+            return (
+                <section className="contact-me">
+                    <Address 
+                    name="Sally"
+                    email= "sally@IntenetExplorer.old"
+                    phone="34100572415"
+                    />
+                </section>
+            );
+        }
+
+        function App(props) {
+            console.log(props);
+            const studentName = "Sally Student";
+            return (
+                <div>
+                    <ResumeHeader name="Sally Student" />
+                    <main role="main" className={props.className}>
+                        {props.children}
+                    </main>
+                </div>
+            );
+        }
+        ReactDOM.render(
+        // Add a className to the App
+        <App className='resume'>
+                <SallyPhoto />
+                <Introduction />
+                <EducationList />
+                <JobsList />                
+                <ContactInfo />
+        </App>,
+        document.querySelector('#app')
+        );
+    </script>
+</body>
+</html>
